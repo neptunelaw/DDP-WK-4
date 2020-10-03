@@ -1,0 +1,88 @@
+---
+title: "Fake Data Presentation"
+author: "neptunelaw"
+date: "10/4/2020"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## R Markdown
+
+This is an R Markdown presentation. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document.
+
+## Codes - ui.R
+
+library(shiny)
+
+ # Define UI for application that draws a histogram
+shinyUI(fluidPage(
+
+    # Application title
+    titlePanel("Here are some Fake Data!"),
+
+    # Sidebar with a slider input for number of bins
+    sidebarLayout(
+        sidebarPanel(
+            h3("Please don't touch this slider!"),
+            sliderInput("bins",
+                        "Number of bins:",
+                        min = 1,
+                        max = 50,
+                        value = 30)
+        ),
+
+## Codes - ui.R (continued)
+        # Show a plot of the generated distribution
+        mainPanel(
+            plotOutput("distPlot")
+        )
+    )
+))
+
+
+
+## More codes - server.R
+
+library(shiny)
+
+ # Define server logic required to draw a histogram
+shinyServer(function(input, output) {
+
+    output$distPlot <- renderPlot({
+
+        # generate bins based on input$bins from ui.R
+        x    <- faithful[, 2]
+        bins <- seq(min(x), max(x), length.out = input$bins + 1)
+
+        # draw the histogram with the specified number of bins
+        hist(x, breaks = bins, col = 'orange', border = 'white')
+
+    })
+
+})
+
+## Slide with Plot
+
+Please take a look at https://neptunelaw.shinyapps.io/DDP-CP4/ if you enjoy fake information unlike POTUS Donald Trump! 
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+(I'm kidding of course...)
+
